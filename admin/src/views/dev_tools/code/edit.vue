@@ -78,22 +78,20 @@
                 prop="columnType"
                 min-width="100"
               />
-              <el-table-column label="python类型" min-width="100">
+              <el-table-column label="golang类型" min-width="100">
                 <template v-slot="{ row }">
-                  <el-select v-model="row.pyType">
-                    <el-option label="Long" value="Long" />
-                    <el-option label="String" value="String" />
-                    <el-option label="Integer" value="Integer" />
-                    <el-option label="Double" value="Double" />
-                    <el-option label="BigDecimal" value="BigDecimal" />
-                    <el-option label="Date" value="Date" />
-                    <el-option label="Boolean" value="Boolean" />
+                  <el-select v-model="row.goType">
+                    <el-option label="int" value="int" />
+                    <el-option label="string" value="string" />
+                    <el-option label="float64" value="float64" />
+                    <el-option label="bool" value="bool" />
+                    <el-option label="time.Time" value="time.Time" />
                   </el-select>
                 </template>
               </el-table-column>
-              <el-table-column label="python属性" min-width="100">
+              <el-table-column label="golang属性" min-width="100">
                 <template v-slot="{ row }">
-                  <el-input v-model="row.pyField" />
+                  <el-input v-model="row.goField" />
                 </template>
               </el-table-column>
               <el-table-column label="必填" width="80">
@@ -402,6 +400,7 @@ const getDetails = async () => {
     //@ts-ignore
     formData[key] = data[key];
   });
+  console.log(formData);
 };
 
 const { optionsData } = useDictOptions<{
