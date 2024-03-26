@@ -153,7 +153,7 @@
     <code-edit
       v-if="editState.show"
       v-model="editState.show"
-      :code="editState.code"
+      :id="editState.id"
     />
   </div>
 </template>
@@ -189,7 +189,7 @@ const previewState = reactive({
 const editState = reactive({
   show: false,
   loading: false,
-  code: {},
+  id: 0,
 });
 
 const { pager, getLists, resetParams, resetPage } = usePaging({
@@ -223,8 +223,8 @@ const handlePreview = async (id: number) => {
 };
 
 const handleEdit = async (id: number) => {
-  const data: any = await generatePreview({ id });
-  editState.code = data;
+  //   const data: any = await generatePreview({ id });
+  editState.id = id;
   editState.show = true;
 };
 
