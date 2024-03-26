@@ -425,6 +425,8 @@ const handleSave = async () => {
   try {
     await formRef.value?.validate();
     const { base, column, gen } = formData;
+    const d = { ...base, ...gen, columns: column };
+    console.log(JSON.parse(JSON.stringify(d)));
     await generateEdit({ ...base, ...gen, columns: column });
     feedback.msgSuccess("操作成功");
     removeTab();

@@ -89,7 +89,7 @@
                   Edit
                 </el-button>
 
-                <el-button type="primary" link v-perms="['gen:editTable']">
+                <!-- <el-button type="primary" link v-perms="['gen:editTable']">
                   <router-link
                     :to="{
                       path: getRoutePath('gen:editTable'),
@@ -100,7 +100,7 @@
                   >
                     编辑 11
                   </router-link>
-                </el-button>
+                </el-button> -->
                 <el-dropdown
                   class="ml-2"
                   @command="handleCommand($event, row)"
