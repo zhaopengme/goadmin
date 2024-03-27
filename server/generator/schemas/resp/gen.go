@@ -56,8 +56,8 @@ type GenColumnResp struct {
 	ColumnComment string      `json:"columnComment" structs:"columnComment"` // 字段描述
 	ColumnLength  int         `json:"columnLength" structs:"columnLength"`   // 字段长度
 	ColumnType    string      `json:"columnType" structs:"columnType"`       // 字段类型
-	JavaType      string      `json:"goType" structs:"goType"`               // Go类型
-	JavaField     string      `json:"goField" structs:"goField"`             // Go字段
+	GoType        string      `json:"goType" structs:"goType"`               // Go类型
+	GoField       string      `json:"goField" structs:"goField"`             // Go字段
 	IsRequired    uint8       `json:"isRequired" structs:"isRequired"`       // 是否必填
 	IsInsert      uint8       `json:"isInsert" structs:"isInsert"`           // 是否为插入字段
 	IsEdit        uint8       `json:"isEdit" structs:"isEdit"`               // 是否编辑字段

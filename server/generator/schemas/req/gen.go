@@ -1,14 +1,17 @@
 package req
 
-import "time"
+import (
+	"likeadmin/core"
+	"time"
+)
 
-//DbTablesReq 库表列表参数
+// DbTablesReq 库表列表参数
 type DbTablesReq struct {
 	TableName    string `form:"tableName"`    // 表名称
 	TableComment string `form:"tableComment"` // 表描述
 }
 
-//ListTableReq 生成列表参数
+// ListTableReq 生成列表参数
 type ListTableReq struct {
 	TableName    string    `form:"tableName"`                          // 表名称
 	TableComment string    `form:"tableComment"`                       // 表描述
@@ -16,37 +19,44 @@ type ListTableReq struct {
 	EndTime      time.Time `form:"endTime" time_format:"2006-01-02"`   // 结束时间
 }
 
-//DetailTableReq 生成详情参数
+// DetailTableReq 生成详情参数
 type DetailTableReq struct {
 	ID uint `form:"id" binding:"required,gt=0"` // 主键
 }
 
-//ImportTableReq 导入表结构参数
+// ImportTableReq 导入表结构参数
 type ImportTableReq struct {
 	Tables string `form:"tables" binding:"required"` // 导入的表, 用","分隔
 }
 
-//SyncTableReq 同步表结构参数
+// SyncTableReq 同步表结构参数
 type SyncTableReq struct {
 	ID uint `form:"id" binding:"required,gt=0"` // 主键
 }
 
-//EditColumn 表编辑列
+// EditColumn 表编辑列
 type EditColumn struct {
-	ID            uint   `form:"id" binding:"required,gt=0"`               // 主键
-	ColumnComment string `form:"columnComment" binding:"required,max=200"` // 列描述
-	JavaField     string `form:"goField" binding:"required,max=100"`       // 字段
-	IsRequired    uint8  `form:"isStop" binding:"oneof=0 1"`               // 是否必填: [0=否, 1=是]
-	IsInsert      uint8  `form:"isInsert" binding:"oneof=0 1"`             // 是否新增字段: [0=否, 1=是]
-	IsEdit        uint8  `form:"isEdit" binding:"oneof=0 1"`               // 是否编辑字段: [0=否, 1=是]
-	IsList        uint8  `form:"isList" binding:"oneof=0 1"`               // 是否列表字段: [0=否, 1=是]
-	IsQuery       uint8  `form:"isQuery" binding:"oneof=0 1"`              // 是否查询字段: [0=否, 1=是]
-	QueryType     string `form:"queryType" binding:"required,max=30"`      // 查询方式
-	HtmlType      string `form:"htmlType" binding:"required,max=30"`       // 表单类型
-	DictType      string `form:"dictType" binding:"required,max=200"`      // 字典类型
+	ID            uint        `form: "id" binding: "required,gt=0"`               // 主键
+	TableID       uint        `form: "tableID" binding: "required"`               // 表ID
+	ColumnName    string      `form: "columnName" binding: "required,max=100"`    // 列名
+	ColumnComment string      `form: "columnComment" binding: "required,max=200"` // 列描述
+	ColumnLength  int         `form: "columnLength" binding: "required,gt=0"`     // 列长度
+	ColumnType    string      `form: "columnType" binding: "required,max=100"`    // 列类型
+	GoType        string      `form: "goType" binding: "required,max=100"`        // Go类型
+	GoField       string      `form: "goField" binding: "required,max=100"`       // 字段
+	IsRequired    uint8       `form: "isStop" binding: "oneof=0 1"`               // 是否必填: [0=否, 1=是]
+	IsInsert      uint8       `form: "isInsert" binding: "oneof=0 1"`             // 是否新增字段: [0=否, 1=是]
+	IsEdit        uint8       `form: "isEdit" binding: "oneof=0 1"`               // 是否编辑字段: [0=否, 1=是]
+	IsList        uint8       `form: "isList" binding: "oneof=0 1"`               // 是否列表字段: [0=否, 1=是]
+	IsQuery       uint8       `form: "isQuery" binding: "oneof=0 1"`              // 是否查询字段: [0=否, 1=是]
+	QueryType     string      `form: "queryType" binding: "required,max=30"`      // 查询方式
+	HtmlType      string      `form: "htmlType" binding: "required,max=30"`       // 表单类型
+	DictType      string      `form: "dictType" binding: "required,max=200"`      // 字典类型
+	CreateTime    core.TsTime `form: "createTime" binding: "required"`            // 创建时间
+	UpdateTime    core.TsTime `form: "updateTime" binding: "required"`            // 更新时间
 }
 
-//EditTableReq 编辑表结构参数
+// EditTableReq 编辑表结构参数
 type EditTableReq struct {
 	ID           uint         `form:"id" binding:"required,gt=0"`                    // 主键
 	TableName    string       `form:"tableName" binding:"required,min=1,max=200"`    // 表名称
@@ -67,22 +77,22 @@ type EditTableReq struct {
 	Columns      []EditColumn `form:"columns" binding:"required"`                    // 字段列表
 }
 
-//DelTableReq 删除表结构参数
+// DelTableReq 删除表结构参数
 type DelTableReq struct {
 	Ids []uint `form:"ids" binding:"required"` // 主键
 }
 
-//PreviewCodeReq 预览代码参数
+// PreviewCodeReq 预览代码参数
 type PreviewCodeReq struct {
 	ID uint `form:"id" binding:"required,gt=0"` // 主键
 }
 
-//GenCodeReq 生成代码参数
+// GenCodeReq 生成代码参数
 type GenCodeReq struct {
 	Tables string `form:"tables" binding:"required"` // 生成的表, 用","分隔
 }
 
-//DownloadReq 下载代码参数
+// DownloadReq 下载代码参数
 type DownloadReq struct {
 	Tables string `form:"tables" binding:"required"` // 下载的表, 用","分隔
 }

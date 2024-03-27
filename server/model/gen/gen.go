@@ -1,6 +1,6 @@
 package gen
 
-//GenTable 代码生成业务实体
+// GenTable 代码生成业务实体
 type GenTable struct {
 	ID           uint   `gorm:"primarykey;comment:'主键'"`
 	TableName    string `gorm:"not null;default:'';comment:'表名称''"`
@@ -22,7 +22,7 @@ type GenTable struct {
 	UpdateTime   int64  `gorm:"autoUpdateTime;not null;comment:'更新时间'"`
 }
 
-//GenTableColumn 代码生成表列实体
+// GenTableColumn 代码生成表列实体
 type GenTableColumn struct {
 	ID            uint   `gorm:"primarykey;comment:'列主键'"`
 	TableID       uint   `gorm:"not null;default:0;comment:'表外键'"`
@@ -30,8 +30,8 @@ type GenTableColumn struct {
 	ColumnComment string `gorm:"not null;default:'';comment:'列描述'"`
 	ColumnLength  int    `gorm:"not null;default:0;comment:'列长度'"`
 	ColumnType    string `gorm:"not null;default:'';comment:'列类型'"`
-	JavaType      string `gorm:"not null;default:'';comment:'类型'"`
-	JavaField     string `gorm:"not null;default:'';comment:'字段名'"`
+	GoType        string `gorm:"not null;default:'';comment:'类型'"`
+	GoField       string `gorm:"not null;default:'';comment:'字段名'"`
 	IsPk          uint8  `gorm:"not null;default:0;comment:'是否主键: [1=是, 0=否]'"`
 	IsIncrement   uint8  `gorm:"not null;default:0;comment:'是否自增: [1=是, 0=否]'"`
 	IsRequired    uint8  `gorm:"not null;default:0;comment:'是否必填: [1=是, 0=否]'"`

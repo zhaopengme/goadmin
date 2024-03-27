@@ -35,12 +35,12 @@ func (srv {{{ toCamelCase .EntityName }}}Service) List(page request.PageReq, lis
 	{{{- range .Columns }}}
 	{{{- if .IsQuery }}}
 	{{{- $queryOpr := index $.ModelOprMap .QueryType }}}
-	{{{- if and (eq .JavaType "string") (eq $queryOpr "like") }}}
+	{{{- if and (eq .GoType "string") (eq $queryOpr "like") }}}
 	if listReq.{{{ title (toCamelCase .ColumnName) }}} != "" {
         model = model.Where("{{{ .ColumnName }}} like ?", "%"+listReq.{{{ title (toCamelCase .ColumnName) }}}+"%")
     }
     {{{- else }}}
-    if listReq.{{{ title (toCamelCase .ColumnName) }}} {{{ if eq .JavaType "string" }}}!= ""{{{ else }}}>=0{{{ end }}} {
+    if listReq.{{{ title (toCamelCase .ColumnName) }}} {{{ if eq .GoType "string" }}}!= ""{{{ else }}}>=0{{{ end }}} {
         model = model.Where("{{{ .ColumnName }}} = ?", listReq.{{{ title (toCamelCase .ColumnName) }}})
     }
     {{{- end }}}
@@ -83,7 +83,7 @@ func (srv {{{ toCamelCase .EntityName }}}Service) Detail(id uint) (res {{{ title
 	}
 	response.Copy(&res, obj)
 	{{{- range .Columns }}}
-    {{{- if and .IsEdit (contains (slice "image" "avatar" "logo" "img") .JavaField) }}}
+    {{{- if and .IsEdit (contains (slice "image" "avatar" "logo" "img") .GoField) }}}
     res.Avatar = util.UrlUtil.ToAbsoluteUrl(res.Avatar)
     {{{- end }}}
     {{{- end }}}

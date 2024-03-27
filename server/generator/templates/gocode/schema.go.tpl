@@ -8,7 +8,7 @@ import (
 type {{{ title (toCamelCase .EntityName) }}}ListReq struct {
     {{{- range .Columns }}}
     {{{- if .IsQuery }}}
-    {{{ title (toCamelCase .JavaField) }}} {{{ .JavaType }}} `form:"{{{ toCamelCase .JavaField }}}"` // {{{ .ColumnComment }}}
+    {{{ title (toCamelCase .GoField) }}} {{{ .GoType }}} `form:"{{{ toCamelCase .GoField }}}"` // {{{ .ColumnComment }}}
     {{{- end }}}
     {{{- end }}}
 }
@@ -17,7 +17,7 @@ type {{{ title (toCamelCase .EntityName) }}}ListReq struct {
 type {{{ title (toCamelCase .EntityName) }}}DetailReq struct {
     {{{- range .Columns }}}
     {{{- if .IsPk }}}
-    {{{ title (toCamelCase .JavaField) }}} {{{ .JavaType }}} `form:"{{{ toCamelCase .JavaField }}}"` // {{{ .ColumnComment }}}
+    {{{ title (toCamelCase .GoField) }}} {{{ .GoType }}} `form:"{{{ toCamelCase .GoField }}}"` // {{{ .ColumnComment }}}
     {{{- end }}}
     {{{- end }}}
 }
@@ -26,7 +26,7 @@ type {{{ title (toCamelCase .EntityName) }}}DetailReq struct {
 type {{{ title (toCamelCase .EntityName) }}}AddReq struct {
     {{{- range .Columns }}}
     {{{- if .IsInsert }}}
-    {{{ title (toCamelCase .JavaField) }}} {{{ .JavaType }}} `form:"{{{ toCamelCase .JavaField }}}"` // {{{ .ColumnComment }}}
+    {{{ title (toCamelCase .GoField) }}} {{{ .GoType }}} `form:"{{{ toCamelCase .GoField }}}"` // {{{ .ColumnComment }}}
     {{{- end }}}
     {{{- end }}}
 }
@@ -35,7 +35,7 @@ type {{{ title (toCamelCase .EntityName) }}}AddReq struct {
 type {{{ title (toCamelCase .EntityName) }}}EditReq struct {
     {{{- range .Columns }}}
     {{{- if .IsEdit }}}
-    {{{ title (toCamelCase .JavaField) }}} {{{ .JavaType }}} `form:"{{{ toCamelCase .JavaField }}}"` // {{{ .ColumnComment }}}
+    {{{ title (toCamelCase .GoField) }}} {{{ .GoType }}} `form:"{{{ toCamelCase .GoField }}}"` // {{{ .ColumnComment }}}
     {{{- end }}}
     {{{- end }}}
 }
@@ -44,7 +44,7 @@ type {{{ title (toCamelCase .EntityName) }}}EditReq struct {
 type {{{ title (toCamelCase .EntityName) }}}DelReq struct {
     {{{- range .Columns }}}
     {{{- if .IsPk }}}
-    {{{ title (toCamelCase .JavaField) }}} {{{ .JavaType }}} `form:"{{{ toCamelCase .JavaField }}}"` // {{{ .ColumnComment }}}
+    {{{ title (toCamelCase .GoField) }}} {{{ .GoType }}} `form:"{{{ toCamelCase .GoField }}}"` // {{{ .ColumnComment }}}
     {{{- end }}}
     {{{- end }}}
 }
@@ -53,7 +53,7 @@ type {{{ title (toCamelCase .EntityName) }}}DelReq struct {
 type {{{ title (toCamelCase .EntityName) }}}Resp struct {
 	{{{- range .Columns }}}
     {{{- if or .IsList .IsPk }}}
-    {{{ title (toCamelCase .JavaField) }}} {{{ .JavaType }}} `json:"{{{ toCamelCase .JavaField }}}" structs:"{{{ toCamelCase .JavaField }}}"` // {{{ .ColumnComment }}}
+    {{{ title (toCamelCase .GoField) }}} {{{ .GoType }}} `json:"{{{ toCamelCase .GoField }}}" structs:"{{{ toCamelCase .GoField }}}"` // {{{ .ColumnComment }}}
     {{{- end }}}
     {{{- end }}}
 }

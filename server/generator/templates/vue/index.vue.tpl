@@ -5,16 +5,16 @@
             {{{- range .Columns }}}
             {{{- if eq .IsQuery 1 }}}
                 {{{- if eq .HtmlType "datetime" }}}
-                <el-form-item label="{{{ .ColumnComment }}}" prop="{{{ .JavaField }}}">
+                <el-form-item label="{{{ .ColumnComment }}}" prop="{{{ .GoField }}}">
                     <daterange-picker
                         v-model:startTime="queryParams.createTimeStart"
                         v-model:endTime="queryParams.createTimeEnd"
                     />
                 </el-form-item>
                 {{{- else if or (eq .HtmlType "select") (eq .HtmlType "radio") }}}
-                <el-form-item label="{{{ .ColumnComment }}}" prop="{{{ .JavaField }}}">
+                <el-form-item label="{{{ .ColumnComment }}}" prop="{{{ .GoField }}}">
                     <el-select
-                        v-model="queryParams.{{{ .JavaField }}}"
+                        v-model="queryParams.{{{ .GoField }}}"
                         class="w-[280px]"
                         clearable
                     >
@@ -32,8 +32,8 @@
                     </el-select>
                 </el-form-item>
                 {{{- else if eq .HtmlType "input" }}}
-                <el-form-item label="{{{ .ColumnComment }}}" prop="{{{ .JavaField }}}">
-                    <el-input class="w-[280px]" v-model="queryParams.{{{ .JavaField }}}" />
+                <el-form-item label="{{{ .ColumnComment }}}" prop="{{{ .GoField }}}">
+                    <el-input class="w-[280px]" v-model="queryParams.{{{ .GoField }}}" />
                 </el-form-item>
                 {{{- end }}}
             {{{- end }}}
@@ -62,26 +62,26 @@
             {{{- range .Columns }}}
             {{{- if .IsList }}}
                 {{{- if and (ne .DictType "") (or (eq .HtmlType "select") (eq .HtmlType "radio") (eq .HtmlType "checkbox")) }}}
-                <el-table-column label="{{{ .ColumnComment }}}" prop="{{{ .JavaField }}}" min-width="100">
+                <el-table-column label="{{{ .ColumnComment }}}" prop="{{{ .GoField }}}" min-width="100">
                     <template #default="{ row }">
-                        <dict-value :options="dictData.{{{ .DictType }}}" :value="row.{{{ .JavaField }}}" />
+                        <dict-value :options="dictData.{{{ .DictType }}}" :value="row.{{{ .GoField }}}" />
                     </template>
                 </el-table-column>
                 {{{- else if eq .HtmlType "imageUpload" }}}
-                <el-table-column label="{{{ .ColumnComment }}}" prop="{{{ .JavaField }}}" min-width="100">
+                <el-table-column label="{{{ .ColumnComment }}}" prop="{{{ .GoField }}}" min-width="100">
                     <template #default="{ row }">
                         <image-contain
                             :width="40"
                             :height="40"
-                            :src="row.{{{ .JavaField }}}"
-                            :preview-src-list="[row.{{{ .JavaField }}}]"
+                            :src="row.{{{ .GoField }}}"
+                            :preview-src-list="[row.{{{ .GoField }}}]"
                             preview-teleported
                             hide-on-click-modal
                         />
                     </template>
                 </el-table-column>
                 {{{- else }}}
-                <el-table-column label="{{{ .ColumnComment }}}" prop="{{{ .JavaField }}}" min-width="100" />
+                <el-table-column label="{{{ .ColumnComment }}}" prop="{{{ .GoField }}}" min-width="100" />
                 {{{- end }}}
             {{{- end }}}
             {{{- end }}}
@@ -135,10 +135,10 @@ const queryParams = reactive({
 {{{- range .Columns }}}
 {{{- if .IsQuery }}}
     {{{- if eq .HtmlType "datetime" }}}
-    {{{ .JavaField }}}Start: '',
-    {{{ .JavaField }}}End: '',
+    {{{ .GoField }}}Start: '',
+    {{{ .GoField }}}End: '',
     {{{- else }}}
-    {{{ .JavaField }}}: '',
+    {{{ .GoField }}}: '',
     {{{- end }}}
 {{{- end }}}
 {{{- end }}}
