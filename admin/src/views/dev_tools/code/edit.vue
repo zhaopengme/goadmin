@@ -44,6 +44,7 @@
                   v-model="formData.base.authorName"
                   placeholder="请输入作者"
                   clearable
+                  value="admin"
                 />
               </div>
             </el-form-item>
@@ -81,7 +82,9 @@
               <el-table-column label="golang类型" min-width="100">
                 <template v-slot="{ row }">
                   <el-select v-model="row.goType">
+                    <el-option label="uint" value="uint" />
                     <el-option label="int" value="int" />
+                    <el-option label="int64" value="int64" />
                     <el-option label="string" value="string" />
                     <el-option label="float64" value="float64" />
                     <el-option label="bool" value="bool" />
@@ -429,7 +432,6 @@ const handleSave = async () => {
     await generateEdit({ ...base, ...gen, columns: column });
     feedback.msgSuccess("操作成功");
     removeTab();
-    // router.back();
   } catch (error: any) {
     for (const err in error) {
       const isInRules = Object.keys(rules).includes(err);
