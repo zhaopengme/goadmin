@@ -61,6 +61,7 @@ func AddJob(jobName string, cron string, invokeTarget string) {
 
 	cronTrigger, _ := quartz.NewCronTrigger(cron)
 	functionJob := job.NewFunctionJob(func(_ context.Context) (int, error) {
+		log.Printf("invoke target: %s\n", invokeTarget)
 		util.Get(invokeTarget)
 		return 42, nil
 	})
