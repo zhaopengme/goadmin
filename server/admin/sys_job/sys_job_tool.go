@@ -5,6 +5,8 @@ import (
 	"github.com/reugn/go-quartz/job"
 	"github.com/reugn/go-quartz/quartz"
 	"log"
+	"strconv"
+	"x_admin/config"
 	"x_admin/util"
 )
 
@@ -61,8 +63,14 @@ func AddJob(jobName string, cron string, invokeTarget string) {
 
 	cronTrigger, _ := quartz.NewCronTrigger(cron)
 	functionJob := job.NewFunctionJob(func(_ context.Context) (int, error) {
-		log.Printf("invoke target: %s\n", invokeTarget)
-		util.Get(invokeTarget)
+		url := "http://127.0.0.1:" + strconv.Itoa(config.Config.ServerPort) + "/api/" + invokeTarget
+		log.Printf("url: %s\n", url)
+		result, e := util.Get(url)
+		if e != nil {
+			log.Println(e)
+		} else {
+			log.Println(result)
+		}
 		return 42, nil
 	})
 	sched.ScheduleJob(quartz.NewJobDetail(functionJob, jobKey), cronTrigger)
