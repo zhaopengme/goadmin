@@ -7,12 +7,12 @@ import (
 	"net/http"
 	"strconv"
 	"time"
+	"x_admin/admin/sys_job"
 	"x_admin/config"
 	"x_admin/core"
 	"x_admin/core/response"
 	"x_admin/middleware"
 	"x_admin/routers"
-	"x_admin/scheduler"
 
 	//_ "x_admin/docs"
 
@@ -77,7 +77,7 @@ func initServer(router *gin.Engine) *http.Server {
 }
 
 func initSchedule() {
-	go scheduler.Start()
+	go sys_job.Start()
 }
 
 //	@title			x_admin文档

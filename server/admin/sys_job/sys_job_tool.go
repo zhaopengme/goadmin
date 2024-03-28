@@ -1,13 +1,11 @@
-package scheduler
+package sys_job
 
 import (
 	"context"
-	"log"
-	"x_admin/admin/sys_job"
-	"x_admin/util"
-
 	"github.com/reugn/go-quartz/job"
 	"github.com/reugn/go-quartz/quartz"
+	"log"
+	"x_admin/util"
 )
 
 var sched quartz.Scheduler
@@ -37,7 +35,7 @@ func Start() {
 }
 
 func loadFromDb() {
-	list, e := sys_job.Service.ListAll()
+	list, e := Service.ListAll()
 	if e != nil {
 		log.Println(e)
 		return

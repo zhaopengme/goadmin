@@ -80,7 +80,11 @@ func (hd SysJobHandler) Add(c *gin.Context) {
 	if response.IsFailWithResp(c, util.VerifyUtil.VerifyBody(c, &addReq)) {
 		return
 	}
-	response.CheckAndResp(c, Service.Add(addReq))
+	e := Service.Add(addReq)
+	if e == nil {
+		AddJob(addReq.Name, addReq.CronExpression, addReq.InvokeTarget)
+	}
+	response.CheckAndResp(c, e)
 }
 
 // @Summary	定时任务调度编辑
@@ -101,7 +105,15 @@ func (hd SysJobHandler) Edit(c *gin.Context) {
 	if response.IsFailWithResp(c, util.VerifyUtil.VerifyBody(c, &editReq)) {
 		return
 	}
-	response.CheckAndResp(c, Service.Edit(editReq))
+	e := Service.Edit(editReq)
+	if e == nil {
+		if editReq.Status == "0" {
+			AddJob(editReq.Name, editReq.CronExpression, editReq.InvokeTarget)
+		} else {
+			DelJob(editReq.Name)
+		}
+	}
+	response.CheckAndResp(c, e)
 }
 
 // @Summary	定时任务调度删除
@@ -116,5 +128,8 @@ func (hd SysJobHandler) Del(c *gin.Context) {
 	if response.IsFailWithResp(c, util.VerifyUtil.VerifyBody(c, &delReq)) {
 		return
 	}
-	response.CheckAndResp(c, Service.Del(delReq.Id))
+	detail, _ := Service.Detail(delReq.Id)
+	DelJob(detail.Name)
+	e := Service.Del(delReq.Id)
+	response.CheckAndResp(c, e)
 }
